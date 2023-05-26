@@ -2,15 +2,15 @@ package main
 
 import (
 	"context"
+	"os"
 	"os/exec"
 	"testing"
 
 	"github.com/Masterminds/semver/v3"
-
 	"github.com/stretchr/testify/require"
 )
 
-func TestFoo(t *testing.T) {
+func Test_prevVersion(t *testing.T) {
 	ctx := context.Background()
 	dir := t.TempDir()
 	c := exec.Command("sh", "-c", `
@@ -31,7 +31,10 @@ git commit --allow-empty -m "forth"
 git tag bar
 `,
 	)
+	c.Env = append(os.Environ(), "EMAIL=foo@example.com", "GIT_AUTHOR_NAME=foo", "GIT_COMMITTER_NAME=foo")
 	c.Dir = dir
+	c.Stdout = os.Stdout
+	c.Stderr = os.Stderr
 	require.NoError(t, c.Run())
 
 	t.Run("", func(t *testing.T) {
