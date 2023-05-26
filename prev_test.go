@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"os/exec"
 	"testing"
 
@@ -10,17 +9,6 @@ import (
 
 	"github.com/stretchr/testify/require"
 )
-
-func Test_prevVersion(t *testing.T) {
-	ctx := context.Background()
-	opts := prevVersionOptions{
-		repoDir:  "/tmp/git",
-		prefixes: []string{"v"},
-	}
-	got, err := prevVersion(ctx, &opts)
-	require.NoError(t, err)
-	fmt.Println(got)
-}
 
 func TestFoo(t *testing.T) {
 	ctx := context.Background()
