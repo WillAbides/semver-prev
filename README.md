@@ -1,1 +1,1 @@
-# goproject-tmpl
+# semver-prev
